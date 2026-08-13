@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Raksha Bandhan ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff7b00, #ff1744, #8e24aa);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    padding: 20px 0;
+}
+
+/* Animated background */
+
+.circle {
+    position: fixed;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    filter: blur(8px);
+    animation: float 6s infinite alternate;
+    z-index: 0;
+}
+
+.c1 {
+    top: -50px;
+    left: -50px;
+}
+
+.c2 {
+    bottom: -60px;
+    right: -50px;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    from {
+        transform: translate(0,0);
+    }
+
+    to {
+        transform: translate(70px,40px);
+    }
+}
+
+/* Main card */
+
+.card {
+    width: 92%;
+    max-width: 450px;
+    padding: 30px 24px;
+    text-align: center;
+    border-radius: 28px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.35);
+    position: relative;
+    z-index: 5;
+}
+
+/* Rakhi icon */
+
+.rakhi {
+    font-size: 75px;
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Text */
+
+h1 {
+    font-size: 30px;
+    margin: 10px 0;
+}
+
+.subtitle {
+    color: #ffe9e9;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+/* Password */
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    outline: none;
+    border-radius: 14px;
+    font-size: 17px;
+    text-align: center;
+    margin-bottom: 15px;
+    background: rgba(255,255,255,0.95);
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 14px;
+    background: white;
+    color: #d81b60;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: scale(1.02);
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+#error {
+    margin-top: 12px;
+    color: #ffe082;
+    min-height: 20px;
+}
+
+/* Secret page */
+
+#secret {
+    display: none;
+}
+
+.message {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #fff5f5;
+}
+
+/* Gallery */
+
+.gallery-title {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 2px solid rgba(255,255,255,0.5);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.gallery img:hover {
+    transform: scale(1.04);
+}
+
+/* Signature */
+
+.signature {
+    margin-top: 22px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+/* Falling emojis */
+
+.falling {
+    position: fixed;
+    top: -30px;
+    font-size: 25px;
+    animation: fall linear forwards;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 400px) {
+
+    .card {
+        padding: 25px 18px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .gallery img {
+        height: 125px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="circle c1"></div>
+<div class="circle c2"></div>
+
+
+<!-- =========================
+     PASSWORD SCREEN
+========================= -->
+
+<div class="card" id="login">
+
+    <div class="rakhi">
+        🪷
+    </div>
+
+    <h1>
+        ✨ A Special Surprise ✨
+    </h1>
+
+    <div class="subtitle">
+        A little Raksha Bandhan message
+        especially for you ❤️
+    </div>
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Enter the secret password"
+        onkeydown="if(event.key === 'Enter') unlock()"
+    >
+
+    <button onclick="unlock()">
+        🔓 Unlock Surprise
+    </button>
+
+    <div id="error"></div>
+
+</div>
+
+
+<!-- =========================
+     SECRET PAGE
+========================= -->
+
+<div class="card" id="secret">
+
+    <div class="rakhi">
+        🪷
+    </div>
+
+    <h1>
+        Happy Raksha Bandhan! ❤️
+    </h1>
+
+    <div class="message">
+
+        To you,
+
+        <br><br>
+
+        Wishing you a very
+        Happy Raksha Bandhan! ❤️
+
+        <br><br>
+
+        May this special day bring you
+        lots of happiness, love and
+        beautiful memories.
+
+        <br><br>
+
+        Stay happy, stay blessed,
+        and always keep smiling! 🥰✨
+
+    </div>
+
+
+    <!-- =========================
+         PHOTO GALLERY
+    ========================= -->
+
+    <div class="gallery-title">
+        📸 Special Memories
+    </div>
+
+    <div class="gallery">
+
+        <!-- IMAGE 1 -->
+        <img
+            src="49116.jpg"
+            alt="Playing at the mall"
+        >
+
+        <!-- IMAGE 2 -->
+        <img
+            src="49113.jpg"
+            alt="Fun activity games"
+        >
+
+        <!-- IMAGE 3 -->
+        <img
+            src="49135.jpg"
+            alt="Walking on the beach"
+        >
+
+        <!-- IMAGE 4 -->
+        <img
+            src="49128.jpg"
+            alt="Family celebration"
+        >
+
+    </div>
+
+
+    <div class="signature">
+        ❤️ With lots of love ❤️
+    </div>
+
+    <div class="footer">
+        Made specially for you ✨
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   PASSWORD
+========================= */
+
+const correctPassword = "1109";
+
+
+function unlock() {
+
+    const entered =
+        document.getElementById("password").value;
+
+    const error =
+        document.getElementById("error");
+
+
+    if (entered === correctPassword) {
+
+        document.getElementById("login")
+            .style.display = "none";
+
+        document.getElementById("secret")
+            .style.display = "block";
+
+        error.innerHTML = "";
+
+        startAnimation();
+
+    }
+
+    else {
+
+        error.innerHTML =
+            "❌ Wrong password! Try again.";
+
+        document.getElementById("password")
+            .value = "";
+
+    }
+
+}
+
+
+/* =========================
+   FALLING ANIMATION
+========================= */
+
+function startAnimation() {
+
+    setInterval(function() {
+
+        const item =
+            document.createElement("div");
+
+        item.className = "falling";
+
+
+        const emojis = [
+            "🪷",
+            "❤️",
+            "✨",
+            "🌸",
+            "🧿",
+            "🎀"
+        ];
+
+
+        item.innerHTML =
+            emojis[
+                Math.floor(
+                    Math.random() *
+                    emojis.length
+                )
+            ];
+
+
+        item.style.left =
+            Math.random() * 100 + "vw";
+
+
+        item.style.animationDuration =
+            (3 + Math.random() * 4) + "s";
+
+
+        document.body.appendChild(item);
+
+
+        setTimeout(function() {
+            item.remove();
+        }, 7000);
+
+
+    }, 350);
+
+}
+
+</script>
+
+</body>
+</html>
